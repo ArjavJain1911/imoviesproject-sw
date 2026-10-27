@@ -1,0 +1,237 @@
+/* IMovies - Cinematic Dark Theme & Design System */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --im-primary: #e50914;
+  --im-primary-hover: #b80710;
+  --im-gold: #ffb703;
+  --im-dark-bg: #0b0c10;
+  --im-surface: #151722;
+  --im-surface-hover: #1e2230;
+  --im-surface-border: rgba(255, 255, 255, 0.08);
+  --im-text: #f8fafc;
+  --im-text-muted: #94a3b8;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--im-dark-bg);
+  color: var(--im-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism & Cards */
+.im-card {
+  background: var(--im-surface);
+  border: 1px solid var(--im-surface-border);
+  border-radius: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.im-card:hover {
+  border-color: rgba(229, 9, 20, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.im-glass {
+  background: rgba(21, 23, 34, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--im-surface-border);
+}
+
+/* Custom Buttons */
+.btn-cinema {
+  background: linear-gradient(135deg, #e50914, #ff334b);
+  color: #ffffff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  box-shadow: 0 4px 15px rgba(229, 9, 20, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-cinema:hover {
+  background: linear-gradient(135deg, #b80710, #e50914);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+}
+
+.btn-cinema-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.btn-cinema-outline:hover {
+  border-color: var(--im-primary);
+  color: var(--im-primary);
+  background: rgba(229, 9, 20, 0.08);
+}
+
+/* Hero Carousel */
+.hero-banner {
+  position: relative;
+  min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 50px;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #0b0c10 10%, rgba(11, 12, 16, 0.7) 50%, rgba(11, 12, 16, 0.2) 100%);
+}
+
+/* Movie Poster Card */
+.movie-poster-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+}
+
+.movie-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.im-card:hover .movie-poster-img {
+  transform: scale(1.05);
+}
+
+.rating-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(11, 12, 16, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 183, 3, 0.4);
+  color: var(--im-gold);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 30px;
+}
+
+/* Seat Selection Matrix */
+.screen-curve-wrap {
+  perspective: 500px;
+  margin-bottom: 35px;
+}
+
+.cinema-screen {
+  height: 14px;
+  background: linear-gradient(90deg, rgba(229, 9, 20, 0.1), rgba(255, 255, 255, 0.9), rgba(229, 9, 20, 0.1));
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
+  transform: rotateX(-30deg) scale(0.95);
+}
+
+.seat {
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+  border-radius: 8px 8px 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.seat.available {
+  background: #1f2333;
+  color: #94a3b8;
+  border: 1px solid #333a4f;
+}
+
+.seat.available:hover {
+  background: #2b3147;
+  color: #ffffff;
+  transform: scale(1.15);
+  border-color: #64748b;
+}
+
+.seat.selected {
+  background: var(--im-primary);
+  color: #ffffff;
+  border: 1px solid #ff4d5a;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.7);
+  transform: scale(1.12);
+}
+
+.seat.booked {
+  background: #161820;
+  color: #3b3f4d;
+  border: 1px solid #232530;
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* Digital Ticket */
+.ticket-container {
+  background: #151722;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-cutout-left, .ticket-cutout-right {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: var(--im-dark-bg);
+  border-radius: 50%;
+  top: 65%;
+  transform: translateY(-50%);
+}
+
+.ticket-cutout-left { left: -12px; }
+.ticket-cutout-right { right: -12px; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--im-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2e42;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3e4460;
+}
