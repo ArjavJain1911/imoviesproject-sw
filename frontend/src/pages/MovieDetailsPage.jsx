@@ -155,16 +155,39 @@ const MovieDetailsPage = () => {
                 {movie.description}
               </p>
 
-              {/* Director & Cast Details */}
-              <div className="d-flex flex-column gap-2 small text-secondary mb-4">
-                {movie.director && (
-                  <div>
-                    <strong className="text-white">Director:</strong> {movie.director}
-                  </div>
-                )}
+              {/* Cast & Crew Details */}
+              <div className="d-flex flex-column gap-2 small text-secondary mb-4 p-3 rounded-3" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', maxWidth: '800px' }}>
+                <div className="row g-2">
+                  {movie.director && (
+                    <div className="col-sm-6">
+                      <strong className="text-white d-block mb-1">
+                        <i className="bi bi-camera-reels text-danger me-1"></i> Director:
+                      </strong>
+                      <span className="text-light">{movie.director}</span>
+                    </div>
+                  )}
+                  {movie.producer && (
+                    <div className="col-sm-6">
+                      <strong className="text-white d-block mb-1">
+                        <i className="bi bi-briefcase text-warning me-1"></i> Producer(s):
+                      </strong>
+                      <span className="text-light">{movie.producer}</span>
+                    </div>
+                  )}
+                </div>
+
                 {movie.cast && movie.cast.length > 0 && (
-                  <div>
-                    <strong className="text-white">Starring:</strong> {movie.cast.join(', ')}
+                  <div className="mt-2 pt-2 border-top border-dark">
+                    <strong className="text-white d-block mb-1">
+                      <i className="bi bi-people text-info me-1"></i> Starring Cast:
+                    </strong>
+                    <div className="d-flex flex-wrap gap-1">
+                      {movie.cast.map((actor) => (
+                        <span key={actor} className="badge bg-dark border border-secondary text-light px-2 py-1">
+                          {actor}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

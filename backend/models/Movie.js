@@ -55,6 +55,10 @@ const movieSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    producer: {
+      type: String,
+      default: '',
+    },
     cast: {
       type: [String],
       default: [],

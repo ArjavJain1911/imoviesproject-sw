@@ -20,7 +20,8 @@ const AdminDashboardPage = () => {
     certificate: 'PG-13',
     status: 'now-showing',
     director: '',
-    cast: 'Actor One, Actor Two',
+    producer: '',
+    cast: '',
     releaseDate: new Date().toISOString().split('T')[0],
   });
   const [isSubmittingMovie, setIsSubmittingMovie] = useState(false);
@@ -55,10 +56,10 @@ const AdminDashboardPage = () => {
       setIsSubmittingMovie(true);
       const payload = {
         ...movieForm,
-        genre: movieForm.genre.split(',').map((g) => g.trim()),
-        cast: movieForm.cast.split(',').map((c) => c.trim()),
-        duration: Number(movieForm.duration),
-        rating: Number(movieForm.rating),
+        genre: movieForm.genre.split(',').map((g) => g.trim()).filter(Boolean),
+        cast: movieForm.cast ? movieForm.cast.split(',').map((c) => c.trim()).filter(Boolean) : [],
+        duration: Number(movieForm.duration) || 120,
+        rating: Number(movieForm.rating) || 8.0,
       };
 
       const res = await moviesAPI.create(payload);
@@ -77,6 +78,7 @@ const AdminDashboardPage = () => {
           certificate: 'PG-13',
           status: 'now-showing',
           director: '',
+          producer: '',
           cast: '',
           releaseDate: new Date().toISOString().split('T')[0],
         });
@@ -305,20 +307,22 @@ const AdminDashboardPage = () => {
                       required
                     />
                     <small className="text-secondary" style={{ fontSize: '0.68rem' }}>
-                      Must be direct image ending in .jpg/.png
+                      Vertical poster (.jpg/.png)
                     </small>
                   </div>
                   <div className="col-6">
-                    <label className="form-label text-secondary mb-1">Backdrop Image URL</label>
+                    <label className="form-label text-secondary mb-1">
+                      Backdrop / Banner URL
+                    </label>
                     <input
                       type="url"
                       className="form-control form-control-sm bg-dark text-white border-secondary"
-                      placeholder="https://.../banner.jpg"
+                      placeholder="https://.../backdrop.jpg"
                       value={movieForm.backdropUrl}
                       onChange={(e) => setMovieForm({ ...movieForm, backdropUrl: e.target.value })}
                     />
                     <small className="text-secondary" style={{ fontSize: '0.68rem' }}>
-                      Wide banner image (optional)
+                      Background where description appears
                     </small>
                   </div>
                 </div>
@@ -337,6 +341,45 @@ const AdminDashboardPage = () => {
                   <small className="text-secondary" style={{ fontSize: '0.68rem' }}>
                     Paste standard YouTube video or trailer link
                   </small>
+                </div>
+
+                {/* Cast & Crew Section */}
+                <div className="p-2 rounded-2 mb-2" style={{ background: '#0d0f17', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div className="text-secondary fw-semibold mb-2" style={{ fontSize: '0.75rem' }}>
+                    <i className="bi bi-person-badge text-warning me-1"></i> Cast & Crew Information
+                  </div>
+                  <div className="row g-2 mb-2">
+                    <div className="col-6">
+                      <label className="form-label text-secondary mb-1" style={{ fontSize: '0.72rem' }}>Director</label>
+                      <input
+                        type="text"
+                        className="form-control form-control-sm bg-dark text-white border-secondary"
+                        placeholder="e.g. Christopher Nolan"
+                        value={movieForm.director}
+                        onChange={(e) => setMovieForm({ ...movieForm, director: e.target.value })}
+                      />
+                    </div>
+                    <div className="col-6">
+                      <label className="form-label text-secondary mb-1" style={{ fontSize: '0.72rem' }}>Producer</label>
+                      <input
+                        type="text"
+                        className="form-control form-control-sm bg-dark text-white border-secondary"
+                        placeholder="e.g. Kevin Feige, Emma Thomas"
+                        value={movieForm.producer}
+                        onChange={(e) => setMovieForm({ ...movieForm, producer: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="form-label text-secondary mb-1" style={{ fontSize: '0.72rem' }}>Starring Actors / Cast (comma-separated)</label>
+                    <input
+                      type="text"
+                      className="form-control form-control-sm bg-dark text-white border-secondary"
+                      placeholder="e.g. Robert Downey Jr., Cillian Murphy, Zendaya"
+                      value={movieForm.cast}
+                      onChange={(e) => setMovieForm({ ...movieForm, cast: e.target.value })}
+                    />
+                  </div>
                 </div>
 
                 <div className="row g-2 mb-2">
