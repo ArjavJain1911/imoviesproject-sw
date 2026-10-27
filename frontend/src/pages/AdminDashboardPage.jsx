@@ -407,6 +407,9 @@ const AdminDashboardPage = () => {
                             alt={m.title}
                             className="rounded-2"
                             style={{ width: '36px', height: '50px', objectFit: 'cover' }}
+                            onError={(e) => {
+                              e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+                            }}
                           />
                         </td>
                         <td className="fw-semibold text-white">{m.title}</td>
