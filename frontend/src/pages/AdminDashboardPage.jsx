@@ -12,6 +12,7 @@ const AdminDashboardPage = () => {
     description: '',
     posterUrl: '',
     backdropUrl: '',
+    trailerUrl: '',
     genre: 'Action, Sci-Fi',
     duration: 150,
     language: 'English',
@@ -68,6 +69,7 @@ const AdminDashboardPage = () => {
           description: '',
           posterUrl: '',
           backdropUrl: '',
+          trailerUrl: '',
           genre: 'Action, Sci-Fi',
           duration: 150,
           language: 'English',
@@ -291,24 +293,50 @@ const AdminDashboardPage = () => {
 
                 <div className="row g-2 mb-2">
                   <div className="col-6">
-                    <label className="form-label text-secondary mb-1">Poster URL</label>
+                    <label className="form-label text-secondary mb-1">
+                      Poster Image URL <span className="text-danger">*</span>
+                    </label>
                     <input
                       type="url"
                       className="form-control form-control-sm bg-dark text-white border-secondary"
+                      placeholder="https://.../poster.jpg"
                       value={movieForm.posterUrl}
                       onChange={(e) => setMovieForm({ ...movieForm, posterUrl: e.target.value })}
                       required
                     />
+                    <small className="text-secondary" style={{ fontSize: '0.68rem' }}>
+                      Must be direct image ending in .jpg/.png
+                    </small>
                   </div>
                   <div className="col-6">
-                    <label className="form-label text-secondary mb-1">Backdrop URL</label>
+                    <label className="form-label text-secondary mb-1">Backdrop Image URL</label>
                     <input
                       type="url"
                       className="form-control form-control-sm bg-dark text-white border-secondary"
+                      placeholder="https://.../banner.jpg"
                       value={movieForm.backdropUrl}
                       onChange={(e) => setMovieForm({ ...movieForm, backdropUrl: e.target.value })}
                     />
+                    <small className="text-secondary" style={{ fontSize: '0.68rem' }}>
+                      Wide banner image (optional)
+                    </small>
                   </div>
+                </div>
+
+                <div className="mb-2">
+                  <label className="form-label text-secondary mb-1">
+                    <i className="bi bi-youtube text-danger me-1"></i> Trailer URL (YouTube Link)
+                  </label>
+                  <input
+                    type="url"
+                    className="form-control form-control-sm bg-dark text-white border-secondary"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    value={movieForm.trailerUrl}
+                    onChange={(e) => setMovieForm({ ...movieForm, trailerUrl: e.target.value })}
+                  />
+                  <small className="text-secondary" style={{ fontSize: '0.68rem' }}>
+                    Paste standard YouTube video or trailer link
+                  </small>
                 </div>
 
                 <div className="row g-2 mb-2">
